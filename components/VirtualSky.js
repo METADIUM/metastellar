@@ -20,7 +20,7 @@ export default class VirtualSky extends Component {
         target: {name: 'Astro'}, ra: {decimal: 0}, dec: {decimal: 0}, currentBid: '0', minBidTic: '0', lastBid: '0'
       },
       currentMetaID: {
-        name: '이한결', joined: '2018년 5월 부터 소유중', about: '코인플러그 개발자', image: 'https://apod.nasa.gov/apod/image/9612/sagan_uc.gif'
+        name: 'Esji', joined: 'Since 2018', about: 'Anonymous', image: 'https://apod.nasa.gov/apod/image/9612/sagan_uc.gif'
       },
       formattedSearchBase: [],
       formLoading: false,
@@ -147,7 +147,9 @@ export default class VirtualSky extends Component {
               <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
             </Menu.Item>
           </LayoutHeader>
-          <div id={"starmap"} style={styles.container}></div>
+          <div style={styles.starmapContainer}>
+            <div id={"starmap"} style={styles.container}></div>
+          </div>
           <Astro
               astro={this.state.currentAstro}
               message={this.state.message}
@@ -167,7 +169,15 @@ export default class VirtualSky extends Component {
 
 const styles = {
   container: {
+    height: '70vh',
+    width: '70%'
+  },
+  starmapContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '100vh',
-    width: '100%'
+    width: '100%',
+    backgroundColor: 'black'
   }
 };

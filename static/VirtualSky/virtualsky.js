@@ -1274,6 +1274,7 @@ VirtualSky.prototype.createSky = function(){
 			s.mouseover = true;
 			if(typeof s.callback.mouseenter=="function") s.callback.mouseenter.call(s);
 		}).on('mousewheel',{sky:this},function(e, delta) {
+			return false;
 			var s = e.data.sky;
 			if(s.mouse && s.projection.id=="gnomic"){
 				s.changeFOV(delta).draw();

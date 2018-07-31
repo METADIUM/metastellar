@@ -1,6 +1,6 @@
 {
   "projection": "gnomic",
-  "fov": "0",
+  "fov": 99999,
   "credit": false,
   "constellations": true,
   "constellationlabels": true,
