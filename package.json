@@ -1,6 +1,6 @@
 {
   "name": "metastellar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Metastellar DApp",
   "main": "index.js",
   "scripts": {
@@ -11,36 +11,47 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/astrocket/metastellar.git"
+    "url": "git+ssh://git@github.com/hexoul/metastellar.git"
   },
   "keywords": [
     "Ethereum",
     "Metadium",
     "DApp"
   ],
-  "author": "Astro Lee",
+  "author": "Esji Kim",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/astrocket/metastellar/issues"
+    "url": "https://github.com/hexoul/metastellar/issues"
   },
-  "homepage": "https://github.com/astrocket/metastellar",
+  "homepage": "https://github.com/hexoul/metastellar",
   "dependencies": {
     "bignumber.js": "^7.2.1",
+    "eth-lib": "^0.2.8",
+    "ethjs-unit": "^0.1.6",
     "express": "^4.16.3",
     "fs-extra": "^6.0.1",
-    "ganache-cli": "^6.1.0",
+    "ganache-cli": "^6.1.6",
     "lodash": "^4.17.10",
     "mocha": "^5.2.0",
-    "next": "^6.0.3",
-    "npm": "^6.1.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "next": "^6.1.1",
+    "npm": "^6.2.0",
+    "randomhex": "^0.1.5",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-s-alert": "^1.4.1",
-    "semantic-ui-css": "^2.3.1",
+    "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.80.2",
     "solc": "^0.4.24",
+    "swarm-js": "^0.1.37",
     "truffle-hdwallet-provider": "0.0.5",
-    "web3": "^1.0.0-beta.34"
+    "underscore": "^1.9.1",
+    "web3": "^1.0.0-beta.35",
+    "web3-core": "^1.0.0-beta.35",
+    "web3-eth-abi": "^1.0.0-beta.35",
+    "web3-eth-accounts": "^1.0.0-beta.35",
+    "web3-eth-contract": "^1.0.0-beta.35",
+    "web3-eth-personal": "^1.0.0-beta.35",
+    "xhr2-cookies": "^1.1.0"
   },
   "next": {
     "routes": {
