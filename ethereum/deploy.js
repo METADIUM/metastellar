@@ -20,7 +20,7 @@ const setEnv = async () => {
     if (val.split('=')[0] === 'network') {
       network = val.split('=')[1];
       if (val.split('=')[1] === 'metadium') {
-        if (credentials.metadium_api === 'undefined') {
+        if (credentials.metadium_api === '') {
           console.log('Error : add metadium informations into credentials.json')
         } else {
           http_api = credentials.metadium_api;
@@ -41,7 +41,7 @@ const setEnv = async () => {
 const deploy = async () => {
   const accounts = await web3.eth.getAccounts();
   const deployer = accounts[0];
-  const deployerInfo = {gas: '4000000', from: deployer, gasPrice: '4000000000'};
+  const deployerInfo = {gas: 4000000, from: deployer, gasPrice: 10000000000};
   console.log('Attempting to deploy from account : ', deployer);
   console.log('current gas : ', web3.utils.fromWei(await web3.eth.getBalance(accounts[0]), 'ether'));
 
@@ -59,7 +59,7 @@ const deploy = async () => {
 const bigbang = async () => {
   const accounts = await web3.eth.getAccounts();
   const deployer = accounts[0];
-  const deployerInfo = {gas: '4000000', from: deployer, gasPrice: '4000000000'};
+  const deployerInfo = {gas: 4000000, from: deployer, gasPrice: 10000000000};
 
   if (!deployContract) {
     deployedMetaStellar = await new web3.eth.Contract(
@@ -75,7 +75,7 @@ const bigbang = async () => {
       var star = sampleStars[idx];
       idx++;
       deployedMetaStellar.methods.registerAstro(star.ra.decimal * 1000, star.dec.decimal * 1000, star.target.name).send(deployerInfo).then(function() {
-        setTimeout(function() { callReg(); }, 10);
+        setTimeout(function() { callReg(); }, 100);
       });
       console.log(`Star name, ${star.target.name} deployed`);
     } else {
