@@ -2,13 +2,12 @@ import React, {Component} from 'react';
 import metaStellar from '../ethereum/metaStellar.js';
 import web3 from '../ethereum/web3';
 import { BigNumber } from 'bignumber.js'
-import {Astro, RankingList} from './index.js';
+import {Astro, RankingList, WebRTC} from './index.js';
 import {Dropdown, Header, Menu} from 'semantic-ui-react';
 import LayoutHeader from './Header';
 import searchBase from '../static/data/ko/search_base.json';
 import virtualskyInitializer from '../static/data/initializer.json';
 import Alert from 'react-s-alert';
-import { WebRTC } from './WebRTC.js';
 
 export default class VirtualSky extends Component {
 

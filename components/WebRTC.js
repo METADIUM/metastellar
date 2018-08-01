@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Button} from 'semantic-ui-react';
 
-const WebRTC = (props) => {
-  return (
-      <Button>Set Info</Button>
-  )
-};
+export default class WebRTC extends Component {
 
-export {WebRTC};
+  constructor() {
+    super();
+  }
+
+  render() {
+    return (
+        <Button>Set Info</Button>
+    );
+  }
+}
