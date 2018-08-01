@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from 'semantic-ui-react';
 
-export default class WebRTC extends Component {
+class WebRTC extends Component {
 
   constructor() {
     super();
@@ -13,3 +13,5 @@ export default class WebRTC extends Component {
     );
   }
 }
+
+export {WebRTC};
