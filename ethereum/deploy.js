@@ -12,7 +12,7 @@ const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
 let deployedMetaStellar;
 let web3;
 let network = 'ropsten';
-let http_api = `https://${network}.infura.io/${credentials.infura_key}`;
+let http_api = `https://${network}.infura.io/v3/${credentials.infura_key}`;
 let deployContract = false;
 
 const setEnv = async () => {
@@ -75,7 +75,7 @@ const bigbang = async () => {
       var star = sampleStars[idx];
       idx++;
       deployedMetaStellar.methods.registerAstro(star.ra.decimal * 1000, star.dec.decimal * 1000, star.target.name).send(deployerInfo).then(function() {
-        setTimeout(function() { callReg(); }, 100);
+        setTimeout(function() { callReg(); }, 10);
       });
       console.log(`Star name, ${star.target.name} deployed`);
     } else {
