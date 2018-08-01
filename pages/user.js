@@ -55,7 +55,7 @@ export default class User extends Component {
     } else {
       web3.eth.net.getNetworkType()
           .then((network) => {
-            if (network !== 'ropsten') {
+            if (network !== 'ropsten' && network !== 'private') {
               Alert.info('<h4>You are not in a ropsten network.</h4><ul><li><a href="https://metamask.io/" target="_blank">Open Metamask and change your network to ropsten.</a></li></ul>', {
                 position: 'top-right',
                 effect: 'slide',

@@ -20,10 +20,10 @@ const setEnv = async () => {
     if (val.split('=')[0] === 'network') {
       network = val.split('=')[1];
       if (val.split('=')[1] === 'metadium') {
-        if (credentials.metadium_api === '') {
+        if (credentials.private_api === '') {
           console.log('Error : add metadium informations into credentials.json')
         } else {
-          http_api = credentials.metadium_api;
+          http_api = credentials.private_api;
         }
       }
     }

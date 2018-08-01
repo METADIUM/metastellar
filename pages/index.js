@@ -3,7 +3,6 @@ import metaStellar from '../ethereum/metaStellar.js';
 import web3 from '../ethereum/web3.js';
 import {BigNumber} from 'bignumber.js';
 import {Layout, Astro, Constellation} from '../components/index';
-import sampleAstros from '../static/data/star_seed.json';
 import VirtualSky from '../components/VirtualSky';
 import Alert from 'react-s-alert';
 
@@ -69,8 +68,9 @@ class MetaStellarIndex extends Component {
     } else {
       web3.eth.net.getNetworkType()
           .then((network) => {
-            if (network !== 'ropsten') {
-              Alert.info('<h4>You are not in a ropsten network.</h4><ul><li><a href="https://metamask.io/" target="_blank">Open Metamask and change your network to ropsten.</a></li></ul>', {
+            console.log('NETWORK TYPE: ', network)
+            if (network !== 'ropsten' && network !== 'private') {
+              Alert.info('<h4>You are not in a ropsten network.</h4><ul><li><a href="https://metamask.io/" target="_blank">Open Metamask and change your network.</a></li></ul>', {
                 position: 'top-right',
                 effect: 'slide',
                 html: true,
