@@ -8,7 +8,8 @@ if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
   console.log('MetaMask connected');
 } else {
   const provider = new Web3.providers.HttpProvider(
-    `https://ropsten.infura.io/v3/${credentials.infura_key}`
+    //`https://ropsten.infura.io/v3/${credentials.infura_key}`
+    credentials.private_api
   );
   console.log(provider);
   web3 = new Web3(provider);
