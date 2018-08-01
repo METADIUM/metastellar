@@ -8,6 +8,7 @@ import LayoutHeader from './Header';
 import searchBase from '../static/data/ko/search_base.json';
 import virtualskyInitializer from '../static/data/initializer.json';
 import Alert from 'react-s-alert';
+import { WebRTC } from './WebRTC.js';
 
 export default class VirtualSky extends Component {
 
@@ -146,6 +147,9 @@ export default class VirtualSky extends Component {
             <Menu.Item>
               <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
             </Menu.Item>
+            <Menu.Item>
+              <WebRTC />
+            </Menu.Item>
           </LayoutHeader>
           <div style={styles.starmapContainer}>
             <div id={"starmap"} style={styles.container}></div>
@@ -178,6 +182,9 @@ const styles = {
     alignItems: 'center',
     height: '100vh',
     width: '100%',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    backgroundImage: 'url(static/images/bg.jpg)',
+    backgroundSize: 'cover',
+    overflow: 'hidden'
   }
 };
