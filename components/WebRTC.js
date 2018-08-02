@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button} from 'semantic-ui-react';
+import {Button, Popup} from 'semantic-ui-react';
 
 class WebRTC extends Component {
 
@@ -11,13 +11,23 @@ class WebRTC extends Component {
 
   }
 
-  onClickSetInfo() {
-    console.log('clicked')
+  onOpenSetInfo() {
+    console.log('opened')
+  }
+
+  onCloseSetInfo() {
+    console.log('closed')
   }
 
   render() {
     return (
-        <Button onClick={() => this.onClickSetInfo()}>Set Info</Button>
+      <Popup trigger={<Button>Set Info</Button>}
+        on='click'
+        onOpen={() => this.onOpenSetInfo()}
+        onClose={() => this.onCloseSetInfo()}
+        hideOnScroll>
+        test
+      </Popup>
     );
   }
 }
