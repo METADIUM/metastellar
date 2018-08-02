@@ -7,9 +7,17 @@ class WebRTC extends Component {
     super();
   }
 
+  componentDidMount() {
+
+  }
+
+  onClickSetInfo() {
+    console.log('clicked')
+  }
+
   render() {
     return (
-        <Button>Set Info</Button>
+        <Button onClick={() => this.onClickSetInfo()}>Set Info</Button>
     );
   }
 }
