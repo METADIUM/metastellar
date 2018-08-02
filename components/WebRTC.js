@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Button, Popup} from 'semantic-ui-react';
 
+var QRCode = require('qrcode.react');
+
 class WebRTC extends Component {
 
   constructor() {
@@ -25,8 +27,10 @@ class WebRTC extends Component {
         on='click'
         onOpen={() => this.onOpenSetInfo()}
         onClose={() => this.onCloseSetInfo()}
-        hideOnScroll>
-        test
+        hideOnScroll
+        verticalOffset={20}
+        position='bottom center'>
+          <QRCode value="helloqrcode" size="80"/>
       </Popup>
     );
   }

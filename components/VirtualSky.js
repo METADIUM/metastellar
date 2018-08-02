@@ -135,18 +135,18 @@ export default class VirtualSky extends Component {
     return (
         <div>
           <LayoutHeader>
-            <Menu.Item style={{minWidth: '400px'}}>
+            <Menu.Item style={{width: '30%', height: '10vh'}}>
               <Dropdown
-                placeholder='Search Star by name.'
+                placeholder='Search'
                 fluid selection search
                 options={this.state.formattedSearchBase}
                 onChange={(e, { value }) => this.moveTo(value)}
               />
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item style={{width: '20%', height: '10vh'}}>
               <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item style={{width: '30%', height: '10vh'}}>
               <WebRTC />
             </Menu.Item>
           </LayoutHeader>
