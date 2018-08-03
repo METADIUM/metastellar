@@ -28,6 +28,7 @@
     "ajv": "^6.5.2",
     "ajv-keywords": "^3.2.0",
     "bignumber.js": "^7.2.1",
+    "body-parser": "^1.18.3",
     "eth-lib": "^0.2.8",
     "ethjs-unit": "^0.1.6",
     "express": "^4.16.3",
@@ -45,6 +46,7 @@
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.80.2",
     "simplewebrtc": "^3.0.2",
+    "socket.io": "^2.1.1",
     "solc": "^0.4.24",
     "swarm-js": "^0.1.37",
     "truffle-hdwallet-provider": "0.0.5",
@@ -60,8 +62,7 @@
   },
   "next": {
     "routes": {
-      "/address/:address": "pages/address",
-      "/session/:session": "pages/session"
+      "/address/:address": "pages/address"
     }
   }
 }

@@ -22,7 +22,6 @@ export default class User extends Component {
       address: address,
       pages: pages
     };
-
     return initProps || {};
   }
 
