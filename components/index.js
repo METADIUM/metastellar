@@ -1,5 +1,5 @@
 export * from './Astro';
-export * from './WebRTC';
+export * from './MetaInfo';
 export * from './Constellation';
 export * from './Layout';
 export * from './Astro';

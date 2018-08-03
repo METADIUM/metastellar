@@ -60,7 +60,8 @@
   },
   "next": {
     "routes": {
-      "/address/:address": "pages/address"
+      "/address/:address": "pages/address",
+      "/session/:session": "pages/session"
     }
   }
 }

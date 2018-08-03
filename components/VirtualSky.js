@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import metaStellar from '../ethereum/metaStellar.js';
 import web3 from '../ethereum/web3';
 import { BigNumber } from 'bignumber.js'
-import {Astro, RankingList, WebRTC} from './index.js';
+import {Astro, RankingList, MetaInfo} from './index.js';
 import {Dropdown, Header, Menu} from 'semantic-ui-react';
 import LayoutHeader from './Header';
 import searchBase from '../static/data/ko/search_base.json';
@@ -147,7 +147,7 @@ export default class VirtualSky extends Component {
               <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
             </Menu.Item>
             <Menu.Item style={{width: '30%', height: '10vh'}}>
-              <WebRTC />
+              <MetaInfo />
             </Menu.Item>
           </LayoutHeader>
           <div style={styles.starmapContainer}>

@@ -3,18 +3,12 @@ import {Button, Popup} from 'semantic-ui-react';
 
 var QRCode = require('qrcode.react');
 
-class WebRTC extends Component {
+class MetaInfo extends Component {
 
   constructor() {
     super();
-    this.state = {
-      baseRequestUri: 'meta://information?request=name&request=email&service=https%3A%2F%2Fmetastellar.metadium.com&callback=http%3A%2F%2F13.125.251.87%2F3000/conn?p=',
-      requestUri: 'meta://information?request=name&request=email&service=https%3A%2F%2Fmetastellar.metadium.com&callback=http%3A%2F%2F13.125.251.87%2F3000/conn?p=1'
-    }
-  }
-
-  componentDidMount() {
-
+    this.baseRequestUri = "meta://information?request=name&request=email&service=https%3A%2F%2Fmetastellar.metadium.com&callback=http%3A%2F%2F13.125.251.87%2F3000/conn?p=";
+    this.requestUri = this.baseRequestUri + 1;
   }
 
   onOpenSetInfo() {
@@ -33,10 +27,10 @@ class WebRTC extends Component {
         onClose={() => this.onCloseSetInfo()}
         verticalOffset={20}
         position='bottom center'>
-          <QRCode value={this.state.requestUri} size="80"/>
+          <QRCode value={this.requestUri} size="80"/>
       </Popup>
     );
   }
 }
 
-export {WebRTC};
+export {MetaInfo};
