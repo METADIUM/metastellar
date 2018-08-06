@@ -18,7 +18,8 @@ class MetaInfo extends Component {
       .replace('-----END RSA PUBLIC KEY-----', '')
       .replace(/\s+|\n\r|\n|\r$/gm, '')
     this.baseRequestUri = "meta://information?request=name&request=email&service=https%3A%2F%2Fmetastellar.metadium.com&callback=http%3A%2F%2F13.125.251.87%2F3000/conn?p=";
-    this.requestUri = this.baseRequestUri + 1 + "&public_key=" + window.btoa(pubkey);
+    this.requestUri = this.baseRequestUri + 1 + "&public_key=" + encodeURIComponent(pubkey);
+    console.log(this.requestUri)
   }
 
   onOpenSetInfo() {
@@ -36,8 +37,9 @@ class MetaInfo extends Component {
         onOpen={() => this.onOpenSetInfo()}
         onClose={() => this.onCloseSetInfo()}
         verticalOffset={20}
-        position='bottom center'>
-          <QRCode value={this.requestUri} size="80"/>
+        position='bottom right'
+        style={{padding: '2em'}}>
+          <QRCode value={this.requestUri} size="128"/>
       </Popup>
     );
   }
