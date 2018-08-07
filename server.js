@@ -11,13 +11,14 @@ app.prepare()
   server.use(bodyParser.urlencoded({ extended: true }));
   server.use(bodyParser.json());
 
-  server.get('*', (req, res) => {
+  server
+  .get('*', (req, res) => {
     return handle(req, res);
-  }).post('*', (req, res) => {
-    console.log('received', req.query, req.body);
-    res.end('OK')
-  });
-
+  })
+  .post('/metainfo', (req, res) => {
+    res.redirect('/metainfo?session='+req.query['session']+'&name='+req.body['data']['name']['value']+'&sns='+req.body['data']['phone']['value'])
+  })
+  
   server.listen(3000, (err) => {
     if (err) throw err;
     console.log('> Ready on http://localhost:3000');

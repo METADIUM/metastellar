@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import SimpleWebRTC from 'simplewebrtc';
 
 export default class MetaInfoPage extends Component {
 
-  static async getInitialProps({ query: { session } }) {
+  static async getInitialProps({ query: { session, name, sns } }) {
     const initProps = {
       session: session,
+      name: name,
+      sns: sns,
     };
     return initProps || {}
   }
@@ -13,9 +16,21 @@ export default class MetaInfoPage extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.webrtc = new SimpleWebRTC({
+      autoRequestMedia: false,
+    })
+    this.webrtc.joinRoom(this.props.session)
+    this.webrtc.sendToAll('chat', 'test')
+  }
+
+  componentWillUnmount() {
+    this.webrtc.leaveRoom()
+  }
+
   render() {
     return(
-        <p>POST request is only approved</p>
+        <p>{this.props.session},{this.props.name},{this.props.sns}</p>
     )
   }
 }
