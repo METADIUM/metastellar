@@ -29,9 +29,9 @@ class MetaInfo extends Component {
       autoRequestMedia: false,
     });
     this.webrtc.on('connectionReady', (sessionId) => {
-      this.setState({session: sessionId});
       this.requestUri = this.baseRequestUri + sessionId + "&public_key=" + this.pubkey;
       console.log('req uri', this.requestUri);
+      this.setState({session: sessionId});
     });
 
     //crypto.privateDecrypt(PRIVKEY, Buffer.from(encmsg, 'base64'));

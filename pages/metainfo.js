@@ -20,12 +20,14 @@ export default class MetaInfoPage extends Component {
     this.webrtc = new SimpleWebRTC({
       autoRequestMedia: false,
     })
-    this.webrtc.joinRoom(this.props.session, (err, name) => {
-      this.webrtc.sendToAll('pinfo', {
-        name: name,
-        sns: sns,
+    this.webrtc.on('connectionReady', (sessionId) => {
+      this.webrtc.joinRoom(this.props.session, (err, name) => {
+        this.webrtc.sendToAll('pinfo', {
+          name: this.props.name,
+          sns: this.props.sns,
+        });
       });
-    })
+    });
   }
 
   componentWillUnmount() {
@@ -34,7 +36,7 @@ export default class MetaInfoPage extends Component {
 
   render() {
     return(
-        <p>{this.props.session},{this.props.name},{this.props.sns}</p>
+        <p>OK</p>
     )
   }
 }
