@@ -16,7 +16,7 @@ app.prepare()
     return handle(req, res);
   })
   .post('/metainfo', (req, res) => {
-    res.redirect('/metainfo?session='+req.query['session']+'&name='+req.body['data']['name']['value']+'&sns='+req.body['data']['phone']['value'])
+    res.redirect('/metainfo?session='+req.query['session']+'&name='+req.body['data']['name']['value']+'&sns='+req.body['data']['email']['value'])
   })
   
   server.listen(3000, (err) => {

@@ -20,8 +20,12 @@ export default class MetaInfoPage extends Component {
     this.webrtc = new SimpleWebRTC({
       autoRequestMedia: false,
     })
-    this.webrtc.joinRoom(this.props.session)
-    this.webrtc.sendToAll('chat', 'test')
+    this.webrtc.joinRoom(this.props.session, (err, name) => {
+      this.webrtc.sendToAll('pinfo', {
+        name: name,
+        sns: sns,
+      });
+    })
   }
 
   componentWillUnmount() {
