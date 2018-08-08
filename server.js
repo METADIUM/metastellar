@@ -4,12 +4,15 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const bodyParser = require('body-parser');
+var favicon = require('serve-favicon');
+var path = require('path');
 
 app.prepare()
 .then(() => {
   const server = express();
   server.use(bodyParser.urlencoded({ extended: true }));
   server.use(bodyParser.json());
+  server.use(favicon(path.join(__dirname, "static", "favicon.ico")));
 
   server
   .get('*', (req, res) => {
