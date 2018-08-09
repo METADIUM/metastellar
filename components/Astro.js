@@ -53,8 +53,7 @@ const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formL
                   <Card.Content extra>
                     <Input ref={(ref) => this.input = ref} defaultValue={web3.utils.fromWei(astro.currentBid, 'ether')}
                            type='number' min={`${web3.utils.fromWei(astro.currentBid, 'ether')}`}
-                           step='0.01' placeholder='Your Bid' action
-                    >
+                           step='0.01' placeholder='Your Bid' style={styles.formInput} fluid action>
                       <input />
                       <Button color='green' onClick={() => onPressBuy(this.input.inputRef.value, this.name.inputRef.value, this.sns.inputRef.value)} inverted>
                         {`Buy`}
@@ -76,6 +75,10 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+  },
+  formInput: {
+    width: '100%',
+    textAligh: 'right',
   }
 };
 

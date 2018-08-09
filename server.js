@@ -13,7 +13,6 @@ app.prepare()
   server.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
   server.use(bodyParser.urlencoded({ extended: true }));
   server.use(bodyParser.json());
-  server.use(server.static(path.join(__dirname, 'static')));
 
   server
   .get('*', (req, res) => {
