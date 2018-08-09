@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import web3 from '../ethereum/web3'
-import {Modal, Button, Icon, Header, Form, Card, Grid, Input, Message} from 'semantic-ui-react';
+import {Modal, Button, Icon, Header, Form, Card, Grid, Input, Message, Popup} from 'semantic-ui-react';
 import {MetaID} from "./index";
-
-const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formLoading, message, messageUrl}) => {
+var QRCode = require('qrcode.react');
+const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formLoading, message, messageUrl,openPopup,targetUrl}) => {
   return (
       <Modal
           open={modalOpen}
@@ -56,9 +56,18 @@ const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formL
                            step='0.01' placeholder='Your Bid' action
                     >
                       <input />
-                      <Button color='green' onClick={() => onPressBuy(this.input.inputRef.value, this.name.inputRef.value, this.sns.inputRef.value)} inverted>
-                        {`Buy`}
-                      </Button>
+
+                      <Popup trigger={<Button color='green' inverted style={{"padding-left":'.4em',"padding-right": '.4em'}}> Buy with QR</Button>}
+                        on='click'
+                        onOpen={() => onPressBuy(this.input.inputRef.value, this.name.inputRef.value, this.sns.inputRef.value)}
+                     
+                        verticalOffset={20}
+                        position='top right'
+                        style={{padding: '2em'}}>
+                        {openPopup ?
+                          <QRCode value={targetUrl} size="128"/> 
+                          : null}
+                      </Popup>
                     </Input>
                   </Card.Content>
                 </Card>
