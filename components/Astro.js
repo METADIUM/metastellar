@@ -57,7 +57,7 @@ const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formL
                     >
                       <input />
 
-                      <Popup trigger={<Button color='green' inverted style={{"padding-left":'.4em',"padding-right": '.4em'}}> Buy with QR</Button>}
+                      <Popup trigger={<Button color='green' inverted style={{"paddingLeft":'.4em',"paddingRight": '.4em'}}> Buy with QR</Button>}
                         on='click'
                         onOpen={() => onPressBuy(this.input.inputRef.value, this.name.inputRef.value, this.sns.inputRef.value)}
                      
