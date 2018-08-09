@@ -107,7 +107,7 @@ export default class VirtualSky extends Component {
       + "&value="+ request.params[0].value
       + "&data="+ request.params[0].data;
       console.log("trxReq URI : "+this.trxRequestUri);
-      this.setState({ message: `Tx Made. (click for etherscan)`, formLoading: false, popup: true });
+      this.setState({ message: `Scan QR Code with MetaID App. and Send Tx`, formLoading: false, popup: true });
 
       // await metaStellar.methods.buyAstro(id, name, sns).send({from: accounts[0], value: web3.utils.toWei(bid, 'ether'), gasPrice: '1'})
       //     .on('transactionHash', (hash) => {
