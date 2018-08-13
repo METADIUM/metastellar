@@ -6,8 +6,8 @@ export default class MetaInfoPage extends Component {
   static async getInitialProps({ query: { session, name, sns } }) {
     const initProps = {
       session: session,
-      name: name,
-      sns: sns,
+      name: decodeURIComponent(name),
+      sns: decodeURIComponent(sns),
     };
     return initProps || {}
   }
