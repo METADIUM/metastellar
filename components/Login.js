@@ -11,7 +11,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      session: 'undefined',
+      session: '123',
       name: '',
       sns: '',
     };
@@ -28,7 +28,9 @@ class Login extends Component {
     
     this.baseRequestUri = "meta://information?request=name&request=email&service=https%3A%2F%2Fmetastellar.metadium.com&callback=http%3A%2F%2F13.125.251.87%2F3000/metainfo?session=";
     pubkey = encodeURIComponent(pubkey);
+    this.requestUri = this.baseRequestUri + this.state.session + "&public_key=" + pubkey;
 
+    /*
     this.webrtc = new SimpleWebRTC({
       autoRequestMedia: false,
     });
@@ -36,6 +38,7 @@ class Login extends Component {
       this.requestUri = this.baseRequestUri + sessionId + "&public_key=" + pubkey;
       this.setState({session: sessionId});
     });
+    */
 
     // test
     var name = crypto.publicEncrypt(this.pubkey, Buffer('abc')).toString('base64');
@@ -51,6 +54,7 @@ class Login extends Component {
   }
 
   onOpenSetInfo() {
+    /*
     this.webrtc.createRoom(this.state.session, (err, name) => {
       console.log(`created chatroom`, name, err);
     });
@@ -67,16 +71,17 @@ class Login extends Component {
         this.setState({name: name, sns: sns});
       }
     });
+    */
   }
 
   onCloseSetInfo() {
-    this.webrtc.leaveRoom();
+    //this.webrtc.leaveRoom();
   }
 
   render() {
     return (
       <div>
-      {this.state.session != 'undefined' &&
+      {this.state.session != undefined && this.state.session != 'undefined' &&
       <Popup trigger={<Button>Login</Button>}
         on='click'
         onOpen={() => this.onOpenSetInfo()}
@@ -85,7 +90,6 @@ class Login extends Component {
         position='bottom right'
         style={{padding: '2em'}}>
           <QRCode value={this.requestUri} size="128"/>
-          {this.state.name} {this.state.sns}
       </Popup>}
       </div>
     );
