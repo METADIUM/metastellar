@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SimpleWebRTC from 'simplewebrtc';
+var https = require('https');
 
 export default class MetaInfoPage extends Component {
 
@@ -12,8 +13,27 @@ export default class MetaInfoPage extends Component {
     return initProps || {}
   }
 
+  handleResponse(response) {
+    var serverData = '';
+    response.on('data', function (chunk) {
+      serverData += chunk;
+    });
+    response.on('end', function () {
+      console.log("received server data:", serverData);
+      this.data = serverData;
+    });
+  }
+
   constructor(props) {
     super(props);
+    this.data = ''
+    this.state = {
+      data: undefined
+    }
+    https.request({
+      hostname: '2g5198x91e.execute-api.ap-northeast-2.amazonaws.com',
+      path: '/test?key=test&val=4444'},
+      this.handleResponse).end();
   }
 
   /*
@@ -38,7 +58,9 @@ export default class MetaInfoPage extends Component {
 
   render() {
     return(
-      <p>OK</p>
+      <p>
+        {this.data}
+      </p>
     )
   }
 }

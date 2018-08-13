@@ -5,6 +5,7 @@ import SimpleWebRTC from 'simplewebrtc';
 var QRCode = require('qrcode.react');
 const NodeRSA = require('node-rsa');
 var crypto = require('crypto');
+var https = require('https');
 
 class Login extends Component {
 
@@ -72,6 +73,9 @@ class Login extends Component {
       }
     });
     */
+    https.request({
+      hostname: '2g5198x91e.execute-api.ap-northeast-2.amazonaws.com',
+      path: '/test?key=test&val=456'}).end();
   }
 
   onCloseSetInfo() {
