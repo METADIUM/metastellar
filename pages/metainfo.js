@@ -26,17 +26,14 @@ export default class MetaInfoPage extends Component {
           name: this.props.name,
           sns: this.props.sns,
         });
+        this.webrtc.leaveRoom();
       });
     });
   }
 
-  componentWillUnmount() {
-    this.webrtc.leaveRoom()
-  }
-
   render() {
     return(
-        <p>OK</p>
+      <p>OK</p>
     )
   }
 }

@@ -1,5 +1,5 @@
 export * from './Astro';
-export * from './MetaInfo';
+export * from './Login';
 export * from './Constellation';
 export * from './Layout';
 export * from './Astro';

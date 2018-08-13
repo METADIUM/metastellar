@@ -6,7 +6,7 @@ var QRCode = require('qrcode.react');
 const NodeRSA = require('node-rsa');
 var crypto = require('crypto');
 
-class MetaInfo extends Component {
+class Login extends Component {
 
   constructor() {
     super();
@@ -34,7 +34,6 @@ class MetaInfo extends Component {
     });
     this.webrtc.on('connectionReady', (sessionId) => {
       this.requestUri = this.baseRequestUri + sessionId + "&public_key=" + pubkey;
-      console.log('req uri', this.requestUri);
       this.setState({session: sessionId});
     });
 
@@ -93,4 +92,4 @@ class MetaInfo extends Component {
   }
 }
 
-export {MetaInfo};
+export {Login};
