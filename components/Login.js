@@ -12,10 +12,20 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      session: '123',
+      session: this.makeSessionID(),
       name: '',
       sns: '',
     };
+    this.data = '';
+    console.log(this.state.session);
+  }
+
+  makeSessionID() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 5; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
   }
 
   componentDidMount() {
@@ -54,6 +64,34 @@ class Login extends Component {
     */
   }
 
+  checkResponse() {
+    var respBody = '';
+    https.request({
+      host: '2g5198x91e.execute-api.ap-northeast-2.amazonaws.com',
+      path: '/test?key=' + this.state.session,
+      /*
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+      */
+    }, (res) => {
+      let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      res.on('end', () => {
+        console.log('gotall', data)
+        if (data !== '') {
+          console.log('IN')
+          this.data = data;
+          clearInterval(this.interval);
+        }
+      });
+    }).on('error', (err) => {
+      console.log('error', err);
+    }).end();
+  }
+
   onOpenSetInfo() {
     /*
     this.webrtc.createRoom(this.state.session, (err, name) => {
@@ -73,13 +111,15 @@ class Login extends Component {
       }
     });
     */
-    https.request({
-      hostname: '2g5198x91e.execute-api.ap-northeast-2.amazonaws.com',
-      path: '/test?key=test&val=456'}).end();
+
+    this.interval = setInterval(() => {
+      this.checkResponse();
+    }, 2000);
   }
 
   onCloseSetInfo() {
     //this.webrtc.leaveRoom();
+    clearInterval(this.interval);
   }
 
   render() {
@@ -93,7 +133,8 @@ class Login extends Component {
         verticalOffset={20}
         position='bottom right'
         style={{padding: '2em'}}>
-          <QRCode value={this.requestUri} size="128"/>
+          <QRCode value={this.requestUri} size='128'/>
+          <p>{this.data}</p>
       </Popup>}
       </div>
     );

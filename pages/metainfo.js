@@ -7,9 +7,9 @@ export default class MetaInfoPage extends Component {
   static async getInitialProps({ query: { session, name, sns } }) {
     const initProps = {
       session: session,
-      name: decodeURIComponent(name),
-      sns: decodeURIComponent(sns),
-    };
+      name: name,
+      sns: sns,
+    }
     return initProps || {}
   }
 
@@ -20,19 +20,15 @@ export default class MetaInfoPage extends Component {
     });
     response.on('end', function () {
       console.log("received server data:", serverData);
-      this.data = serverData;
     });
   }
 
   constructor(props) {
     super(props);
-    this.data = ''
-    this.state = {
-      data: undefined
-    }
+    var data = this.props.name + "," + this.props.sns;
     https.request({
       hostname: '2g5198x91e.execute-api.ap-northeast-2.amazonaws.com',
-      path: '/test?key=test&val=4444'},
+      path: '/test?key=' + this.props.session + '&val=' + encodeURIComponent(data)},
       this.handleResponse).end();
   }
 
@@ -58,9 +54,7 @@ export default class MetaInfoPage extends Component {
 
   render() {
     return(
-      <p>
-        {this.data}
-      </p>
+      <p>OK</p>
     )
   }
 }
