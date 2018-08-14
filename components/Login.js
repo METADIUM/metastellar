@@ -16,7 +16,6 @@ class Login extends Component {
       name: '',
       sns: '',
     };
-    this.data = '';
     console.log(this.state.session);
   }
 
@@ -65,26 +64,19 @@ class Login extends Component {
   }
 
   checkResponse() {
-    var respBody = '';
     https.request({
       host: '2g5198x91e.execute-api.ap-northeast-2.amazonaws.com',
       path: '/test?key=' + this.state.session,
-      /*
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-      */
     }, (res) => {
       let data = '';
       res.on('data', (chunk) => {
         data += chunk;
       });
       res.on('end', () => {
-        console.log('gotall', data)
         if (data !== '') {
-          console.log('IN')
-          this.data = data;
           clearInterval(this.interval);
+          var ret = decodeURIComponent(data).split(',');
+          this.setState({name: ret[0], sns: ret[1]});
         }
       });
     }).on('error', (err) => {
@@ -134,7 +126,6 @@ class Login extends Component {
         position='bottom right'
         style={{padding: '2em'}}>
           <QRCode value={this.requestUri} size='128'/>
-          <p>{this.data}</p>
       </Popup>}
       </div>
     );
