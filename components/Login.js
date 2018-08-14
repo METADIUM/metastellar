@@ -51,11 +51,11 @@ class Login extends Component {
     */
 
     // test
+    /*
     var name = crypto.publicEncrypt(this.pubkey, Buffer('abc')).toString('base64');
     var sns = crypto.publicEncrypt(this.pubkey, Buffer('a@b.c')).toString('base64');
     console.log(name)
     console.log(sns)
-    /*
     var rname = crypto.privateDecrypt(this.privkey, Buffer.from(name, 'base64')).toString();
     var rsns = crypto.privateDecrypt(this.privkey, Buffer.from(sns, 'base64')).toString();
     console.log(rname)
@@ -76,7 +76,9 @@ class Login extends Component {
         if (data !== '') {
           clearInterval(this.interval);
           var ret = decodeURIComponent(data).split(',');
-          this.setState({name: ret[0], sns: ret[1]});
+          var name = crypto.privateDecrypt(this.privkey, Buffer.from(ret[0], 'base64')).toString();
+          var sns = crypto.privateDecrypt(this.privkey, Buffer.from(ret[1], 'base64')).toString();
+          this.setState({name: name, sns: sns});
         }
       });
     }).on('error', (err) => {
