@@ -115,6 +115,8 @@ class Login extends Component {
   }
 
   render() {
+    console.log('name', this.state.name)
+    console.log('sns', this.state.sns)
     return (
       <div>
       {this.state.session != undefined && this.state.session != 'undefined' &&
