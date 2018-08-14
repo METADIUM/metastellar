@@ -36,7 +36,7 @@ class Login extends Component {
       .replace('-----END PUBLIC KEY-----', '')
       .replace(/\s+|\n\r|\n|\r$/gm, '')
     
-    this.baseRequestUri = "meta://information?request=name&request=email&service=https%3A%2F%2Fmetastellar.metadium.com&callback=http%3A%2F%2F13.125.251.87%2F3000/metainfo?session=";
+    this.baseRequestUri = "meta://information?request=name&request=email&service=https%3A%2F%2Fmetastellar.metadium.com&callback=http%3A%2F%2F13.125.251.87%3A3000/metainfo?session=";
     pubkey = encodeURIComponent(pubkey);
     this.requestUri = this.baseRequestUri + this.state.session + "&public_key=" + pubkey;
 
