@@ -4,9 +4,10 @@ var https = require('https');
 
 export default class MetaInfoPage extends Component {
 
-  static async getInitialProps({ query: { session, name, sns } }) {
+  static async getInitialProps({ query: { session, secret, name, sns } }) {
     const initProps = {
       session: session,
+      secret: secret,
       name: name,
       sns: sns,
     }
@@ -25,7 +26,7 @@ export default class MetaInfoPage extends Component {
 
   constructor(props) {
     super(props);
-    var data = this.props.name + "," + this.props.sns;
+    var data = this.props.secret + "," + this.props.name + "," + this.props.sns;
     https.request({
       hostname: '2g5198x91e.execute-api.ap-northeast-2.amazonaws.com',
       path: '/test?key=' + this.props.session + '&val=' + encodeURIComponent(data)},

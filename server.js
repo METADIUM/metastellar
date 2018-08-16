@@ -24,11 +24,12 @@ app.prepare()
     return handle(req, res);
   })
   .post('/metainfo', (req, res) => {
+    var secret = encodeURIComponent(req.body['secret'])
     var name = encodeURIComponent(req.body['data']['name']['value'])
     var email = encodeURIComponent(req.body['data']['email']['value'])
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.redirect('/metainfo?session='+req.query['session']+'&name='+name+'&sns='+email)
+    res.redirect('/metainfo?session='+req.query['session']+'&secret='+secret+'&name='+name+'&sns='+email)
   })
   
   server.listen(3000, (err) => {

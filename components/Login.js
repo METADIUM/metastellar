@@ -80,8 +80,17 @@ class Login extends Component {
         if (data !== '') {
           clearInterval(this.interval);
           var ret = decodeURIComponent(data).split(',');
-          var name = crypto.privateDecrypt(this.privkey, Buffer.from(ret[0], 'base64')).toString();
-          var sns = crypto.privateDecrypt(this.privkey, Buffer.from(ret[1], 'base64')).toString();
+          var secret = crypto.privateDecrypt(this.privkey, Buffer.from(ret[0], 'base64')).toString();
+          console.log('secret', secret);
+          var decipher = crypto.createDecipher('aes-256-ecb', secret);		
+          chunks = []
+          chunks.push(decipher.update(Buffer.from(ret[1], 'base64').toString('binary')));
+          chunks.push(decipher.final('binary'));
+          var name = Buffer.from(chunks.join(''), 'binary').toString('utf-8');
+          chunks = []
+          chunks.push(decipher.update(Buffer.from(ret[2], 'base64').toString('binary')));
+          chunks.push(decipher.final('binary'));
+          var sns = Buffer.from(chunks.join(''), 'binary').toString('utf-8');
           this.props.setInfo(name, sns);
         }
       });
