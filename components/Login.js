@@ -9,14 +9,18 @@ var https = require('https');
 
 class Login extends Component {
 
+  static async getInitialProps({ query: { setInfo } }) {
+    const initProps = {
+      setInfo: setInfo,
+    }
+    return initProps || {}
+  }
+
   constructor() {
     super();
     this.state = {
       session: this.makeSessionID(),
-      name: '',
-      sns: '',
     };
-    console.log(this.state.session);
   }
 
   makeSessionID() {
@@ -78,7 +82,7 @@ class Login extends Component {
           var ret = decodeURIComponent(data).split(',');
           var name = crypto.privateDecrypt(this.privkey, Buffer.from(ret[0], 'base64')).toString();
           var sns = crypto.privateDecrypt(this.privkey, Buffer.from(ret[1], 'base64')).toString();
-          this.setState({name: name, sns: sns});
+          this.props.setInfo(name, sns);
         }
       });
     }).on('error', (err) => {
@@ -117,8 +121,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log('name', this.state.name)
-    console.log('sns', this.state.sns)
     return (
       <div>
       {this.state.session != undefined && this.state.session != 'undefined' &&

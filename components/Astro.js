@@ -3,7 +3,7 @@ import web3 from '../ethereum/web3'
 import {Modal, Button, Icon, Header, Form, Card, Grid, Input, Message, Popup} from 'semantic-ui-react';
 import {MetaID} from "./index";
 var QRCode = require('qrcode.react');
-const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formLoading, message, messageUrl,openPopup,targetUrl}) => {
+const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formLoading, message, messageUrl, openPopup, targetUrl, name, sns}) => {
   return (
       <Modal
           open={modalOpen}
@@ -35,11 +35,11 @@ const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formL
                     <Form loading={formLoading}>
                       <Form.Field required>
                         <label>Name</label>
-                        <Input ref={(ref) => this.name = ref} placeholder='astro' />
+                        <Input ref={(ref) => this.name = ref} placeholder='astro' defaultValue={name}/>
                       </Form.Field>
                       <Form.Field required>
                         <label>Social</label>
-                        <Input ref={(ref) => this.sns = ref} type='url' placeholder='facebook.com' />
+                        <Input ref={(ref) => this.sns = ref} type='url' placeholder='facebook.com' defaultValue={sns}/>
                       </Form.Field>
                     </Form>
                     {message ?

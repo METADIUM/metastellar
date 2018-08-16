@@ -13,7 +13,8 @@ export default class VirtualSky extends Component {
   constructor() {
     super();
     this.state = {
-      name: '/',
+      name: '',
+      sns: '',
       modalOpen: false,
       currentAstro: {
         target: {name: 'Astro'}, ra: {decimal: 0}, dec: {decimal: 0}, currentBid: '0', minBidTic: '0', lastBid: '0'
@@ -97,7 +98,7 @@ export default class VirtualSky extends Component {
        return false;
      }
     const { id } = this.state.currentAstro;
-    
+
     this.setState({formLoading: true}, async () => {
       var request = metaStellar.methods.buyAstro(id, name, sns).send.request({from: "", value: web3.utils.toWei(bid, 'ether'), gasPrice: '1'})
       this.trxRequestUri = this.baseTrxRequestUri 
@@ -127,6 +128,8 @@ export default class VirtualSky extends Component {
   upBid() {this.setState({currentAstro: {...this.state.currentAstro, currentBid: this.state.currentAstro.currentBid + 0.1} })};
   downBid() {this.setState({currentAstro: {...this.state.currentAstro, currentBid: this.state.currentAstro.currentBid - 0.1} })};
 
+  setInfo(name, sns) {this.setState({name: name, sns: sns})};
+
   render() {
     return (
         <div>
@@ -143,7 +146,10 @@ export default class VirtualSky extends Component {
               <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
             </Menu.Item>
             <Menu.Item style={{width: '30%', height: '10vh'}}>
-              <Login />
+              <Login setInfo={(name, sns) => this.setInfo(name, sns)}/>
+            </Menu.Item>
+            <Menu.Item>
+              <p>{this.state.name},{this.state.sns}</p>
             </Menu.Item>
           </LayoutHeader>
           <div style={styles.starmapContainer}>
@@ -161,6 +167,8 @@ export default class VirtualSky extends Component {
               onPressBuy={(bid, name, sns) => this.onPressBuy(bid, name, sns)}
               openPopup = {this.state.popup}
               targetUrl = {this.trxRequestUri}
+              name = {this.state.name}
+              sns = {this.state.sns}
           />
         </div>
         
