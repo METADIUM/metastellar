@@ -24,7 +24,8 @@ export default class VirtualSky extends Component {
       formattedSearchBase: [],
       formLoading: false,
       message: null,
-      messageUrl: null
+      messageUrl: null,
+      popup:false
     }
   }
 
@@ -44,6 +45,10 @@ export default class VirtualSky extends Component {
       }
     });
     this.setState({formattedSearchBase: fsb});
+    this.baseTrxRequestUri ="meta://transaction?usage=buyAstro&service=https%3A%2F%2Fmetastellar.metadium.com";
+
+    this.trxRequestUri = this.baseTrxRequestUri;
+    // this.setState({ popup: false});
   }
 
   async checkNetwork() {
@@ -88,27 +93,19 @@ export default class VirtualSky extends Component {
   }
 
   async onPressBuy(bid, name, sns) {
-    if (await this.checkNetwork() || this.invalidForm(name, sns)) {
-      return false;
-    }
+     if  (this.invalidForm(name, sns)) { // await this.checkNetwork() ||
+       return false;
+     }
     const { id } = this.state.currentAstro;
-    const accounts = await web3.eth.getAccounts();
-
+    
     this.setState({formLoading: true}, async () => {
-      await metaStellar.methods.buyAstro(id, name, sns).send({from: accounts[0], value: web3.utils.toWei(bid, 'ether'), gasPrice: '1'})
-          .on('transactionHash', (hash) => {
-            this.setState({ message: `Tx Made. (click for etherscan)`, messageUrl: `https://ropsten.etherscan.io/tx/${hash}`, formLoading: false })
-          }).on('confirmation', (confirmationNumber, receipt) => {
-            this.setState({ message: `Transaction Confirmed. (blk:${confirmationNumber})`, messageUrl: `https://ropsten.etherscan.io/tx/${hash}`, formLoading: false })
-          }).on('error', (error) => {
-            Alert.info(`<h4>${error.message}</h4><ul><li><a href="https://ethgasstation.info" target="_blank">ETH gas station</a></li></ul>`, {
-              position: 'top-right',
-              effect: 'slide',
-              html: true,
-              timeout: 5000
-            });
-            this.setState({ formLoading: false});
-          });
+      var request = metaStellar.methods.buyAstro(id, name, sns).send.request({from: "", value: web3.utils.toWei(bid, 'ether'), gasPrice: '1'})
+      this.trxRequestUri = this.baseTrxRequestUri 
+      + "&to="+ request.params[0].to
+      + "&value="+ request.params[0].value
+      + "&data="+ request.params[0].data;
+      console.log("trxReq URI : "+this.trxRequestUri);
+      this.setState({ message: `Scan QR Code with MetaID App. and Send Tx`, formLoading: false, popup: true });
     });
   };
 
@@ -162,8 +159,11 @@ export default class VirtualSky extends Component {
               downBid={() => this.downBid()}
               formLoading={this.state.formLoading}
               onPressBuy={(bid, name, sns) => this.onPressBuy(bid, name, sns)}
+              openPopup = {this.state.popup}
+              targetUrl = {this.trxRequestUri}
           />
         </div>
+        
     );
   }
 
