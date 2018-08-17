@@ -144,11 +144,11 @@ export default class VirtualSky extends Component {
                 onChange={(e, { value }) => this.moveTo(value)}
               />
             </Menu.Item>
-            <Menu.Item style={{width: '20%', height: '10vh'}}>
-              <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
-            </Menu.Item>
-            <Menu.Item style={{width: '30%', height: '10vh'}}>
+            <Menu.Item style={{/*width: '30%',*/ height: '10vh'}}>
               <Login setInfo={(name, sns) => this.setInfo(name, sns)}/>
+            </Menu.Item>
+            <Menu.Item style={{/*width: '20%',*/ height: '10vh'}}>
+              <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
             </Menu.Item>
             <Menu.Item>
               <p>{this.state.name},{this.state.sns}</p>
