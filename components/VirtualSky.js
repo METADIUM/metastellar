@@ -54,6 +54,7 @@ export default class VirtualSky extends Component {
 
   async checkNetwork() {
     let network = true;
+    /*
     if (!(typeof window !== 'undefined' && typeof window.web3 !== 'undefined')) {
       Alert.info('<h4>Metamask not available.</h4><ul><li><a href="https://metamask.io/" target="_blank">Get Metamask now.</a></li></ul>', {
         position: 'top-right',
@@ -76,6 +77,7 @@ export default class VirtualSky extends Component {
           });
       network =false
     }
+    */
     return network;
   }
 

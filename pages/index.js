@@ -58,6 +58,7 @@ class MetaStellarIndex extends Component {
   }
 
   componentDidMount() {
+    /*
     if (!(typeof window !== 'undefined' && typeof window.web3 !== 'undefined')) {
       Alert.info('<h4>Metamask not available.</h4><ul><li><a href="https://metamask.io/" target="_blank">Get Metamask now.</a></li></ul>', {
         position: 'top-right',
@@ -79,6 +80,7 @@ class MetaStellarIndex extends Component {
             }
           });
     }
+    */
   }
 
   render() {

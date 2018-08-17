@@ -37,9 +37,11 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    /*
     const key = new NodeRSA({b: 2048});
     this.pubkey = key.exportKey('public')
     this.privkey = key.exportKey('private')
+    */
     
     /* test */
     this.pubkey = '-----BEGIN PUBLIC KEY-----' + '\n' +
@@ -99,15 +101,14 @@ class Login extends Component {
     */
 
     // test
+    console.log(this.pubkey);
+    var secret = 'xQ1mwjPlRFZKar/A3A8tY764zPBpcfcSQY8sfq9OAxQ=';
+    console.log(crypto.publicEncrypt({key: this.pubkey, padding: crypto.RSA_NO_PADDING}, Buffer.from(secret, 'base64')).toString('base64'));
+    // RSA_PKCS1_PADDING
+
     /*
-    var name = crypto.publicEncrypt(this.pubkey, Buffer('abc')).toString('base64');
-    var sns = crypto.publicEncrypt(this.pubkey, Buffer('a@b.c')).toString('base64');
-    console.log(name)
-    console.log(sns)
-    var rname = crypto.privateDecrypt(this.privkey, Buffer.from(name, 'base64')).toString();
-    var rsns = crypto.privateDecrypt(this.privkey, Buffer.from(sns, 'base64')).toString();
-    console.log(rname)
-    console.log(rsns)
+    var secret = 'XvNeYJAkjs90nJpzUnkVEUPPLmc4BjOAyVFZwg9AQgyhb5Xar74EEcAS9xXaIuVTLWmZNFPq/iRbldrjjDhbrWOv0cG3OUx47LUuXYEys+8AT+80lA5JxW37uJNYKO69BOLBcgC8SXt6MwLCp5bN/h9Iheq41txfe7Cbr6J176wboBZDE+YuHVD/9tm8DEiIscdjwyFt0hDClkq2GPCRoVIYmwfzn3rowf+pi3OdAWD/B9LGgiWnjV6EvJ+9UFEPZLHocFHT/7Qq7DSGTSSshwGA5XZvLuOLjpgxkj+AdqcsIErYzYN+T5mLLftA3ONABP8TZzS6i+ag8TRQZwPpVA==,oy3LF8bLb/QUdG4XEKzAhA==';
+    var rsecret = crypto.privateDecrypt(this.privkey, Buffer.from(secret, 'base64')).toString();
     */
   }
 

@@ -44,6 +44,7 @@ export default class User extends Component {
     this.paginateChain()
     .then(() => this.setState({ loading: false, page: this.state.page + 1 }));
 
+    /*
     if (!(typeof window !== 'undefined' && typeof window.web3 !== 'undefined')) {
       Alert.info('<h4>Metamask not available.</h4><ul><li><a href="https://metamask.io/" target="_blank">Get Metamask now.</a></li></ul>', {
         position: 'top-right',
@@ -64,6 +65,7 @@ export default class User extends Component {
             }
           });
     }
+    */
   }
 
   onClickPagination() {
