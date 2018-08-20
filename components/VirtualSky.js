@@ -151,7 +151,7 @@ export default class VirtualSky extends Component {
               <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
             </Menu.Item>
             <Menu.Item>
-              <p>{this.state.name},{this.state.sns}</p>
+              {this.state.name != "" && <p>{this.state.name},{this.state.sns}</p>}
             </Menu.Item>
           </LayoutHeader>
           <div style={styles.starmapContainer}>

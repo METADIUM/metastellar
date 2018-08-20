@@ -123,17 +123,14 @@ class Login extends Component {
         if (data !== '') {
           clearInterval(this.interval);
           var ret = decodeURIComponent(data).split(',');
-          var secret = crypto.privateDecrypt({key: this.privkey, padding: constants.RSA_PKCS1_PADDING}, Buffer.from(ret[0], 'base64')).toString();
-          console.log('secret', secret);
-          var decipher = crypto.createDecipher('aes-256-ecb', secret);
-          var chunks = []
-          chunks.push(decipher.update(Buffer.from(ret[1], 'base64'), 'binary'));
-          chunks.push(decipher.final('binary'));
-          var name = Buffer.from(chunks.join(''), 'binary').toString('utf-8');
-          chunks = []
-          chunks.push(decipher.update(Buffer.from(ret[2], 'base64'), 'binary'));
-          chunks.push(decipher.final('binary'));
-          var sns = Buffer.from(chunks.join(''), 'binary').toString('utf-8');
+          var secret = crypto.privateDecrypt({key: this.privkey, padding: constants.RSA_PKCS1_PADDING}, Buffer.from(ret[0], 'base64'));
+          console.log('GOT secret');
+          let nDecipher = crypto.createDecipheriv('aes-256-ecb', secret, '');
+          let name = nDecipher.update(Buffer.from(ret[1], 'base64'), 'base64', 'utf-8');
+          name += nDecipher.final('utf-8');
+          let sDecipher = crypto.createDecipheriv('aes-256-ecb', secret, '');
+          let sns = sDecipher.update(Buffer.from(ret[2], 'base64'), 'base64', 'utf-8');
+          sns += sDecipher.final('utf-8');
           this.props.setInfo(name, sns);
         }
       });
