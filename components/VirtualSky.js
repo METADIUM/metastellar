@@ -145,13 +145,12 @@ export default class VirtualSky extends Component {
               />
             </Menu.Item>
             <Menu.Item style={{/*width: '30%',*/ height: '10vh'}}>
-              <Login setInfo={(name, sns) => this.setInfo(name, sns)}/>
+              {this.state.name == '' ?
+              <Login setInfo={(name, sns) => this.setInfo(name, sns)}/> :
+              <p>{this.state.name}<br></br>{this.state.sns}</p>}
             </Menu.Item>
             <Menu.Item style={{/*width: '20%',*/ height: '10vh'}}>
               <RankingList rankers={this.props.rankers} ranking_hashes={this.props.ranking_hashes} />
-            </Menu.Item>
-            <Menu.Item>
-              {this.state.name != "" && <p>{this.state.name},{this.state.sns}</p>}
             </Menu.Item>
           </LayoutHeader>
           <div style={styles.starmapContainer}>
