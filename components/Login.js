@@ -6,6 +6,7 @@ var QRCode = require('qrcode.react');
 const NodeRSA = require('node-rsa');
 var crypto = require('crypto');
 var https = require('https');
+var constants = require('constants');
 
 class Login extends Component {
 
@@ -28,22 +29,17 @@ class Login extends Component {
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (var i = 0; i < 5; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
-    
-    /* test */
-    text = "ABCDE"
-    console.log('session', text)
-    
+    console.log('session', text)    
     return text;
   }
 
   componentDidMount() {
-    /*
     const key = new NodeRSA({b: 2048});
     this.pubkey = key.exportKey('public')
     this.privkey = key.exportKey('private')
-    */
     
     /* test */
+    /*
     this.pubkey = '-----BEGIN PUBLIC KEY-----' + '\n' +
     'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqfyf289+iHxMouSXCGo0' + '\n' +
     'dUObSnGjFxFUfPwWBHIJzViMRXcbnFruA4gerp8Ha/GXTa3e5XUzWnR+E30WnpEO' + '\n' +
@@ -80,6 +76,7 @@ class Login extends Component {
     'pgthoLxvLkNHSkvqBITlzK/7XZ7SaWcw8l7ba4yQrQ8+nJ60ZYeGJkcZwV5qcGaU' + '\n' +
     'g7SQ/K86gtOnmpDAHDGAiGeUnz+61hUrB8WT+RJx8c90ePeNmJ/AkA==' + '\n' +
     '-----END RSA PRIVATE KEY-----';
+    */
     
     var pubkey = this.pubkey
       .replace('-----BEGIN PUBLIC KEY-----', '')
@@ -101,10 +98,11 @@ class Login extends Component {
     */
 
     // test
-    console.log(this.pubkey);
+    /*
     var secret = 'xQ1mwjPlRFZKar/A3A8tY764zPBpcfcSQY8sfq9OAxQ=';
-    console.log(crypto.publicEncrypt({key: this.pubkey, padding: crypto.RSA_NO_PADDING}, Buffer.from(secret, 'base64')).toString('base64'));
+    console.log(crypto.publicEncrypt({key: this.pubkey, padding: constants.RSA_NO_PADDING}, Buffer.from(secret, 'base64')).toString('base64'));    
     // RSA_PKCS1_PADDING
+    */
 
     /*
     var secret = 'XvNeYJAkjs90nJpzUnkVEUPPLmc4BjOAyVFZwg9AQgyhb5Xar74EEcAS9xXaIuVTLWmZNFPq/iRbldrjjDhbrWOv0cG3OUx47LUuXYEys+8AT+80lA5JxW37uJNYKO69BOLBcgC8SXt6MwLCp5bN/h9Iheq41txfe7Cbr6J176wboBZDE+YuHVD/9tm8DEiIscdjwyFt0hDClkq2GPCRoVIYmwfzn3rowf+pi3OdAWD/B9LGgiWnjV6EvJ+9UFEPZLHocFHT/7Qq7DSGTSSshwGA5XZvLuOLjpgxkj+AdqcsIErYzYN+T5mLLftA3ONABP8TZzS6i+ag8TRQZwPpVA==,oy3LF8bLb/QUdG4XEKzAhA==';
@@ -115,7 +113,7 @@ class Login extends Component {
   checkResponse() {
     https.request({
       host: '2g5198x91e.execute-api.ap-northeast-2.amazonaws.com',
-      path: '/test?key=' + 'ABCDE', /* this.state.session, */
+      path: '/test?key=' + this.state.session,
     }, (res) => {
       let data = '';
       res.on('data', (chunk) => {
@@ -125,15 +123,15 @@ class Login extends Component {
         if (data !== '') {
           clearInterval(this.interval);
           var ret = decodeURIComponent(data).split(',');
-          var secret = crypto.privateDecrypt({key: this.privkey, padding: crypto.RSA_NO_PADDING}, Buffer.from(ret[0], 'base64')).toString();
+          var secret = crypto.privateDecrypt({key: this.privkey, padding: constants.RSA_PKCS1_PADDING}, Buffer.from(ret[0], 'base64')).toString();
           console.log('secret', secret);
-          var decipher = crypto.createDecipher('aes-256-ecb', secret);		
-          chunks = []
-          chunks.push(decipher.update(Buffer.from(ret[1], 'base64').toString('binary')));
+          var decipher = crypto.createDecipher('aes-256-ecb', secret);
+          var chunks = []
+          chunks.push(decipher.update(Buffer.from(ret[1], 'base64'), 'binary'));
           chunks.push(decipher.final('binary'));
           var name = Buffer.from(chunks.join(''), 'binary').toString('utf-8');
           chunks = []
-          chunks.push(decipher.update(Buffer.from(ret[2], 'base64').toString('binary')));
+          chunks.push(decipher.update(Buffer.from(ret[2], 'base64'), 'binary'));
           chunks.push(decipher.final('binary'));
           var sns = Buffer.from(chunks.join(''), 'binary').toString('utf-8');
           this.props.setInfo(name, sns);
