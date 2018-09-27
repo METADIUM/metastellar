@@ -29,7 +29,7 @@ class Login extends Component {
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (var i = 0; i < 5; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
-    console.log('session', text)    
+    console.log('session', text)
     return text;
   }
 
