@@ -19,12 +19,12 @@ const setEnv = async () => {
 
 // Signs the given transaction data and sends it. Abstracts some of the details 
 // of buffering and serializing the transaction for web3.
-const sendSigned = async (txData, cb) => {
-  const privateKey = new Buffer(credentials['privkey'], 'hex');
+const sendSigned = function (txData) {
+  const privateKey = Buffer.from(credentials['privkey'], 'hex');
   const transaction = new Tx(txData);
   transaction.sign(privateKey);
   const serializedTx = transaction.serialize().toString('hex');
-  web3.eth.sendSignedTransaction('0x' + serializedTx, cb);
+  web3.eth.sendSignedTransaction('0x' + serializedTx, () => {});
 }
 
 const bigbang = async () => {
@@ -39,9 +39,8 @@ const bigbang = async () => {
     credentials['contractAddr']
   );
 
-  //var idx = await deployedMetaStellar.methods.lastId().call();
-  var idx = 782;
-
+  var idx = await deployedMetaStellar.methods.lastId().call();
+  
   const gasLimit = web3.utils.toHex(25000);
   var callReg = function () {
     for (; idx < sampleStars.length; idx++) {
@@ -56,13 +55,8 @@ const bigbang = async () => {
         from: deployer,
         data: request.params[0].data
       }
-      console.log('txData', star.target.name, txData);
-
-      /*
-      sendSigned(txData, function(err, result) {
-        if (err) return console.log('error', err)
-      });
-      */
+      //console.log('txData', star.target.name, txData);
+      sendSigned(txData);
       console.log(`Star name, ${star.target.name} deployed`);
     }
       
