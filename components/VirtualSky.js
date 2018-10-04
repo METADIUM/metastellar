@@ -9,7 +9,7 @@ import virtualskyInitializer from '../static/data/initializer.json';
 import Alert from 'react-s-alert';
 import { Login, Request, SendTransaction } from 'metasdk-react';
 
-// Callbackfunction binding
+// Callback function binding
 var setInfo;
 
 export default class VirtualSky extends Component {
@@ -61,35 +61,6 @@ export default class VirtualSky extends Component {
     // this.setState({ popup: false});
   }
 
-  async checkNetwork() {
-    let network = true;
-    /*
-    if (!(typeof window !== 'undefined' && typeof window.web3 !== 'undefined')) {
-      Alert.info('<h4>Metamask not available.</h4><ul><li><a href="https://metamask.io/" target="_blank">Get Metamask now.</a></li></ul>', {
-        position: 'top-right',
-        effect: 'slide',
-        html: true,
-        timeout: 5000
-      });
-      network = false;
-    } else {
-      await web3.eth.net.getNetworkType()
-          .then((network) => {
-            if (network !== 'ropsten' && network !== 'private') {
-              Alert.info('<h4>You are not in a ropsten network.</h4><ul><li><a href="https://metamask.io/" target="_blank">Open Metamask and change your network to ropsten.</a></li></ul>', {
-                position: 'top-right',
-                effect: 'slide',
-                html: true,
-                timeout: 5000
-              });
-            }
-          });
-      network =false
-    }
-    */
-    return network;
-  }
-
   invalidForm(name, sns) {
     let invalid = false;
     if (name === '' || sns === '') {
@@ -105,7 +76,7 @@ export default class VirtualSky extends Component {
   }
 
   async onPressBuy(bid, name, sns) {
-     if  (this.invalidForm(name, sns)) { // await this.checkNetwork() ||
+     if  (this.invalidForm(name, sns)) {
        return false;
      }
     const { id } = this.state.currentAstro;

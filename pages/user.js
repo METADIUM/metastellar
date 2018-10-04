@@ -43,29 +43,6 @@ export default class User extends Component {
   componentDidMount() {
     this.paginateChain()
     .then(() => this.setState({ loading: false, page: this.state.page + 1 }));
-
-    /*
-    if (!(typeof window !== 'undefined' && typeof window.web3 !== 'undefined')) {
-      Alert.info('<h4>Metamask not available.</h4><ul><li><a href="https://metamask.io/" target="_blank">Get Metamask now.</a></li></ul>', {
-        position: 'top-right',
-        effect: 'slide',
-        html: true,
-        timeout: 5000
-      });
-    } else {
-      web3.eth.net.getNetworkType()
-          .then((network) => {
-            if (network !== 'ropsten' && network !== 'private') {
-              Alert.info('<h4>You are not in a ropsten network.</h4><ul><li><a href="https://metamask.io/" target="_blank">Open Metamask and change your network to ropsten.</a></li></ul>', {
-                position: 'top-right',
-                effect: 'slide',
-                html: true,
-                timeout: 5000
-              });
-            }
-          });
-    }
-    */
   }
 
   onClickPagination() {
