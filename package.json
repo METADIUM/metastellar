@@ -34,14 +34,11 @@
     "ethjs-unit": "^0.1.6",
     "express": "^4.16.3",
     "fs-extra": "^6.0.1",
-    "ganache-cli": "^6.1.6",
     "http": "0.0.0",
     "https": "^1.0.0",
     "lodash": "^4.17.10",
-    "mocha": "^5.2.0",
-    "next": "^6.1.1",
+    "metasdk-react": "^0.3.1",
     "node-rsa": "^1.0.1",
-    "npm": "^6.3.0",
     "qrcode.react": "^0.8.0",
     "randomhex": "^0.1.5",
     "react": "^16.4.2",
@@ -52,7 +49,6 @@
     "serve-favicon": "^2.5.0",
     "simplewebrtc": "^3.0.2",
     "socket.io": "^2.1.1",
-    "solc": "^0.4.24",
     "swarm-js": "^0.1.37",
     "truffle-hdwallet-provider": "0.0.5",
     "underscore": "^1.9.1",
@@ -62,8 +58,14 @@
     "web3-eth-accounts": "^1.0.0-beta.35",
     "web3-eth-contract": "^1.0.0-beta.35",
     "web3-eth-personal": "^1.0.0-beta.35",
-    "webrtc-adapter": "^6.3.2",
     "xhr2-cookies": "^1.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "next": "^7.0.1",
+    "npm": "^6.4.1",
+    "ganache-cli": "^6.1.6",
+    "solc": "^0.4.24"
   },
   "next": {
     "routes": {

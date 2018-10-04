@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
 import metaStellar from '../ethereum/metaStellar.js';
 import web3 from '../ethereum/web3';
-import { Astro, RankingList, Login } from './index.js';
+import { Astro, RankingList } from './index.js';
 import { Dropdown, Header, Menu } from 'semantic-ui-react';
 import LayoutHeader from './Header';
 import searchBase from '../static/data/ko/search_base.json';
 import virtualskyInitializer from '../static/data/initializer.json';
 import Alert from 'react-s-alert';
+import { Login, Request, SendTransaction } from 'metasdk-react';
+
+// Callbackfunction binding
+var setInfo;
 
 export default class VirtualSky extends Component {
+
+  setInfo(req) {
+    this.setState({name: req['name'], sns: req['email']});
+  };
 
   constructor() {
     super();
@@ -28,6 +36,7 @@ export default class VirtualSky extends Component {
       messageUrl: null,
       popup:false
     }
+    setInfo = this.setInfo.bind(this);
   }
 
   componentDidMount() {
@@ -130,8 +139,6 @@ export default class VirtualSky extends Component {
   upBid() {this.setState({currentAstro: {...this.state.currentAstro, currentBid: this.state.currentAstro.currentBid + 0.1} })};
   downBid() {this.setState({currentAstro: {...this.state.currentAstro, currentBid: this.state.currentAstro.currentBid - 0.1} })};
 
-  setInfo(name, sns) {this.setState({name: name, sns: sns})};
-
   render() {
     return (
         <div>
@@ -146,7 +153,13 @@ export default class VirtualSky extends Component {
             </Menu.Item>
             <Menu.Item style={{/*width: '30%',*/ height: '10vh'}}>
               {this.state.name == '' ?
-              <Login setInfo={(name, sns) => this.setInfo(name, sns)}/> :
+                <Login
+                  request={['name', 'email']}
+                  service='metastellar'
+                  qrvoffset={20}
+                  qrposition='bottom right'
+                  qrpadding='2em'
+                  callback={setInfo}/> :
               <p>{this.state.name}<br></br>{this.state.sns}</p>}
             </Menu.Item>
             <Menu.Item style={{/*width: '20%',*/ height: '10vh'}}>
