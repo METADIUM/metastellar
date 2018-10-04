@@ -34,8 +34,9 @@ contract MetaStellar {
     }
 
     // initializer
-    constructor(address creator, uint minPrice) public {
-        cosmos = creator;
+    constructor(uint minPrice) public {
+        if (minPrice == 0) minPrice = 100;
+        cosmos = msg.sender;
         minimumPrice = minPrice; // minimum bidding price
         lastId = 0; // setting id index
         multiplier = 18;
