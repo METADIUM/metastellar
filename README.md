@@ -36,13 +36,7 @@ You can set your basic credentials here.
 ##### Deploying smart contract & star bases.
 ```bash
 $ cd ethereum
-# deploy contract & stars to mainnet through infura
-$ node deploy.js network=mainnet contract
-# deploy stars only to rinkeby through infura
-$ node deploy.js network=rinkeby
-# deploy stars only to metadium through metadium_api
-$ node deploy.js network=metadium
-# deploy stars only to ropsten through infura
+# deploy stars only
 $ node deploy.js
 ```
 ##### Test Solidity Smart Contract
