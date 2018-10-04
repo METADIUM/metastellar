@@ -157,7 +157,6 @@ export default class VirtualSky extends Component {
               sns = {this.state.sns}
           />
         </div>
-        
     );
   }
 

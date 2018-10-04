@@ -3,6 +3,9 @@ import web3 from '../ethereum/web3'
 import {Modal, Button, Icon, Header, Form, Card, Grid, Input, Message, Popup} from 'semantic-ui-react';
 import {MetaID} from "./index";
 var QRCode = require('qrcode.react');
+
+var nameInput, snsInput, priceInput;
+
 const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formLoading, message, messageUrl, openPopup, targetUrl, name, sns}) => {
   return (
       <Modal
@@ -17,9 +20,8 @@ const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formL
               <Grid.Column width={8}>
                 <p>
                   {`Do you like star #${astro.target.name} ?`}<br/>
-                  {`Buy now and put your identity on constellation using MetaID.`} <a href='https://metadium.com'
-                                                                                      target="_blank">(What is
-                  MetaID?)</a><br/>
+                  {`Buy now and put your identity on constellation using MetaID.`}
+                  <a href='https://metadium.com' target="_blank">(What is MetaID?)</a><br/>
                   {`You can put your name on it.`}
                 </p>
                 <MetaID
@@ -35,11 +37,11 @@ const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formL
                     <Form loading={formLoading}>
                       <Form.Field required>
                         <label>Name</label>
-                        <Input ref={(ref) => this.name = ref} placeholder='astro' defaultValue={name}/>
+                        <Input ref={(ref) => nameInput = ref} placeholder='astro' defaultValue={name}/>
                       </Form.Field>
                       <Form.Field required>
                         <label>Social</label>
-                        <Input ref={(ref) => this.sns = ref} type='url' placeholder='facebook.com' defaultValue={sns}/>
+                        <Input ref={(ref) => snsInput = ref} type='url' placeholder='facebook.com' defaultValue={sns}/>
                       </Form.Field>
                     </Form>
                     {message ?
@@ -51,21 +53,18 @@ const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formL
                       </Message>
                   </Card.Content>
                   <Card.Content extra>
-                    <Input ref={(ref) => this.input = ref} defaultValue={web3.utils.fromWei(astro.currentBid, 'ether')}
+                    <Input ref={(ref) => priceInput = ref} defaultValue={web3.utils.fromWei(astro.currentBid, 'ether')}
                            type='number' min={`${web3.utils.fromWei(astro.currentBid, 'ether')}`}
                            step='0.01' placeholder='Your Bid' style={styles.formInput} fluid action>
                       <input />
 
                       <Popup trigger={<Button color='green' inverted style={{"paddingLeft":'.4em',"paddingRight": '.4em'}}> Buy with QR</Button>}
                         on='click'
-                        onOpen={() => onPressBuy(this.input.inputRef.value, this.name.inputRef.value, this.sns.inputRef.value)}
-                     
+                        onOpen={() => onPressBuy(priceInput.inputRef.value, nameInput.inputRef.value, snsInput.inputRef.value)}
                         verticalOffset={20}
                         position='top right'
                         style={{padding: '2em'}}>
-                        {openPopup ?
-                          <QRCode value={targetUrl} size="128"/> 
-                          : null}
+                        {openPopup ? <QRCode value={targetUrl} size={128} /> : null}
                       </Popup>
                     </Input>
                   </Card.Content>
