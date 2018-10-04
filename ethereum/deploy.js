@@ -29,7 +29,7 @@ const sendSigned = async (txData, cb) => {
 
 const bigbang = async () => {
   const deployer = credentials['addr'];
-  const deployerInfo = {gas: 4000000, from: deployer, gasPrice: 10000000000};
+  const deployerInfo = {gas: 4000000, from: deployer, gasPrice: 10e9};
 
   var nonce = await web3.eth.getTransactionCount(deployer);
   console.log('deployer nonce', nonce);
@@ -42,11 +42,27 @@ const bigbang = async () => {
   //var idx = await deployedMetaStellar.methods.lastId().call();
   var idx = 782;
 
+  const gasLimit = web3.utils.toHex(25000);
   var callReg = function () {
     for (; idx < sampleStars.length; idx++) {
       var star = sampleStars[idx];
       var request = deployedMetaStellar.methods.registerAstro(star.ra.decimal * 1000, star.dec.decimal * 1000, star.target.name).send.request(deployerInfo);
-      console.log('request', star.target.name, request.params[0].data);
+
+      txData = {
+        nonce: web3.utils.toHex(nonce++),
+        gasLimit: gasLimit,
+        gasPrice: request.params[0].gasPrice,
+        to: credentials['contractAddr'],
+        from: deployer,
+        data: request.params[0].data
+      }
+      console.log('txData', star.target.name, txData);
+
+      /*
+      sendSigned(txData, function(err, result) {
+        if (err) return console.log('error', err)
+      });
+      */
       console.log(`Star name, ${star.target.name} deployed`);
     }
       
