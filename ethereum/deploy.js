@@ -11,36 +11,14 @@ const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
 
 let deployedMetaStellar;
 let web3;
-let network = 'ropsten';
-let http_api = `https://${network}.infura.io/v3/${credentials.infura_key}`;
 let deployContract = false;
 
 const setEnv = async () => {
-  process.argv.slice(2).forEach(function (val, index, array) {
-    if (val.split('=')[0] === 'network') {
-      network = val.split('=')[1];
-      if (val.split('=')[1] === 'metadium') {
-        if (credentials.private_api === '') {
-          console.log('Error : add metadium informations into credentials.json')
-        } else {
-          http_api = credentials.private_api;
-        }
-      }
-    }
-    if (val === 'contract') {
-      deployContract = true;
-    }
-  });
-
-  const provider = new HDWalletProvider(
-    credentials['mneumonics'][network],
-    http_api)
-  web3 = new Web3(provider);
+  web3 = new Web3(new Web3.providers.HttpProvider(credentials['url']));
 }
 
 const deploy = async () => {
-  const accounts = await web3.eth.getAccounts();
-  const deployer = accounts[0];
+  const deployer = credentials['addr'];
   const deployerInfo = {gas: 4000000, from: deployer, gasPrice: 10000000000};
   console.log('Attempting to deploy from account : ', deployer);
   console.log('current gas : ', web3.utils.fromWei(await web3.eth.getBalance(accounts[0]), 'ether'));
