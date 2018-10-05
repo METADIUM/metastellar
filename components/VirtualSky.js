@@ -127,7 +127,7 @@ export default class VirtualSky extends Component {
                 <Login
                   request={['name', 'email']}
                   service='metastellar'
-                  qrsize={128}
+                  qrsize={256}
                   qrvoffset={20}
                   qrposition='bottom right'
                   qrpadding='2em'
