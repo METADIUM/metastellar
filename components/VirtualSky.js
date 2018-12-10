@@ -15,7 +15,7 @@ var setInfo;
 export default class VirtualSky extends Component {
 
   setInfo(req) {
-    this.setState({name: req['name'], sns: req['email']});
+    this.setState({name: req['12'], sns: req['30']});
   };
 
   constructor() {
@@ -120,7 +120,7 @@ export default class VirtualSky extends Component {
             <Menu.Item style={{/*width: '30%',*/ height: '10vh'}}>
               {this.state.name == '' ?
                 <Request
-                  request={['10', '20']}
+                  request={['12', '30']}
                   usage='metastellar'
                   qrtext='Login'
                   qrsize={256}
