@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import web3 from '../ethereum/web3'
-import {Modal, Button, Icon, Header, Form, Card, Grid, Input, Message, Popup} from 'semantic-ui-react';
-import {MetaID} from "./index";
+import { Modal, Button, Header, Form, Card, Grid, Input, Message } from 'semantic-ui-react';
+import { MetaID } from "./index";
+import { SendTransaction } from 'metasdk-react';
+
 var QRCode = require('qrcode.react');
 
 var nameInput, snsInput, priceInput;
 
-const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formLoading, message, messageUrl, openPopup, targetUrl, name, sns}) => {
+const Astro = ({ astro, modalOpen, handleClose, onPressBuy, formLoading, message, messageUrl, openPopup, trxRequest, name, sns }) => {
   return (
       <Modal
           open={modalOpen}
@@ -58,14 +60,24 @@ const Astro = ({astro, modalOpen, handleClose, upBid, downBid, onPressBuy, formL
                            step='0.01' placeholder='Your Bid' style={styles.formInput} fluid action>
                       <input />
 
-                      <Popup trigger={<Button color='green' inverted style={{"paddingLeft":'.4em',"paddingRight": '.4em'}}> Buy with QR</Button>}
-                        on='click'
-                        onOpen={() => onPressBuy(priceInput.inputRef.value, nameInput.inputRef.value, snsInput.inputRef.value)}
-                        verticalOffset={20}
-                        position='top right'
-                        style={{padding: '2em'}}>
-                        {openPopup ? <QRCode value={targetUrl} size={128} /> : null}
-                      </Popup>
+                      {openPopup ?
+                        <SendTransaction
+                          usage='metastellar'
+                          request={trxRequest}
+                          qrtext='Buy with QR'
+                          qrsize={256}
+                          qrvoffset={20}
+                          qrposition='top right'
+                          qrpadding='2em'
+                          callback={() => {}}/>
+                        :
+                        <Button
+                          color='green'
+                          onClick={() => onPressBuy(priceInput.inputRef.value, nameInput.inputRef.value, snsInput.inputRef.value)}
+                        >
+                          Make QR to buy
+                        </Button>
+                      }
                     </Input>
                   </Card.Content>
                 </Card>

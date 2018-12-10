@@ -7,7 +7,7 @@ import LayoutHeader from './Header';
 import searchBase from '../static/data/ko/search_base.json';
 import virtualskyInitializer from '../static/data/initializer.json';
 import Alert from 'react-s-alert';
-import { Login, Request, SendTransaction } from 'metasdk-react';
+import { Request } from 'metasdk-react';
 
 // Callback function binding
 var setInfo;
@@ -82,12 +82,7 @@ export default class VirtualSky extends Component {
     const { id } = this.state.currentAstro;
 
     this.setState({formLoading: true}, async () => {
-      var request = metaStellar.methods.buyAstro(id, name, sns).send.request({from: "", value: web3.utils.toWei(bid, 'ether'), gasPrice: '1'})
-      this.trxRequestUri = this.baseTrxRequestUri 
-      + "&to="+ request.params[0].to
-      + "&value="+ request.params[0].value
-      + "&data="+ request.params[0].data;
-      console.log("trxReq URI : "+this.trxRequestUri);
+      this.trxRequest = metaStellar.methods.buyAstro(id, name, sns).send.request({from: "", value: web3.utils.toWei(bid, 'ether'), gasPrice: '1'})
       this.setState({ message: `Scan QR Code with MetaID App. and Send Tx`, formLoading: false, popup: true });
     });
   };
@@ -124,9 +119,10 @@ export default class VirtualSky extends Component {
             </Menu.Item>
             <Menu.Item style={{/*width: '30%',*/ height: '10vh'}}>
               {this.state.name == '' ?
-                <Login
-                  request={['name', 'email']}
-                  service='metastellar'
+                <Request
+                  request={['10', '20']}
+                  usage='metastellar'
+                  qrtext='Login'
                   qrsize={256}
                   qrvoffset={20}
                   qrposition='bottom right'
@@ -152,7 +148,7 @@ export default class VirtualSky extends Component {
               formLoading={this.state.formLoading}
               onPressBuy={(bid, name, sns) => this.onPressBuy(bid, name, sns)}
               openPopup = {this.state.popup}
-              targetUrl = {this.trxRequestUri}
+              trxRequest = {this.trxRequest}
               name = {this.state.name}
               sns = {this.state.sns}
           />
