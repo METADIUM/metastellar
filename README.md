@@ -1,4 +1,4 @@
-## Metastellar project.
+## Metastellar
 
 Constellation market on Blockchain
 
@@ -36,10 +36,17 @@ node compile.js
 # generates ethereum/build/MetaStellar.json
 ```
 
-##### Figuring ethereum enviroment
+##### Prerequisite for Web3
 
-> static/data/credentials.json
-You can set your basic credentials here.
+Before compiling, `static/data/credentials.json` should be provided following spec. Here is example:
+```
+{
+  "url": "http://ropsten.infura.io",
+  "contractAddr": "0xe00fDd5D31c11eACb3D016cC5f9459F81214895f",
+  "addr": "0xA408FCD6B7f3847686Cb5f41e52A7f4E084FD3cc",
+  "privkey": "11111111111111111111111111111111111111111111"
+}
+```
 
 ##### Deploying smart contract & star bases
 
@@ -53,18 +60,6 @@ $ node deploy.js
 
 ```bash
 npm run test
-```
-
-##### Prerequisite for Web3
-
-Before compiling, `static/data/credentials.json` should be provided following spec. Here is example:
-```
-{
-  "url": "http://ropsten.infura.io",
-  "contractAddr": "0xe00fDd5D31c11eACb3D016cC5f9459F81214895f",
-  "addr": "0xA408FCD6B7f3847686Cb5f41e52A7f4E084FD3cc",
-  "privkey": "11111111111111111111111111111111111111111111"
-}
 ```
 
 ##### Run application in local environment
