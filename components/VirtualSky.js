@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
-import metaStellar from '../ethereum/metaStellar.js';
-import web3 from '../ethereum/web3';
-import { Astro, RankingList } from './index.js';
 import { Dropdown, Header, Menu } from 'semantic-ui-react';
-import LayoutHeader from './Header';
-import searchBase from '../static/data/ko/search_base.json';
-import virtualskyInitializer from '../static/data/initializer.json';
 import Alert from 'react-s-alert';
 import { Request } from 'metasdk-react';
+
+import searchBase from '../static/data/ko/search_base.json';
+import virtualskyInitializer from '../static/data/initializer.json';
+
+import { Astro, RankingList } from './index.js';
+import LayoutHeader from './Header';
+
+import metaStellar from '../ethereum/metaStellar.js';
+import web3 from '../ethereum/web3';
 
 // Callback function binding
 var setInfo;
@@ -96,14 +99,14 @@ export default class VirtualSky extends Component {
 
   openAstroModal(object) {
     this.setState({currentAstro: object, message: null, messageUrl: null}, () => {
-      this.handleOpen()
+      this.handleOpen();
     })
   };
 
-  handleOpen() {this.setState({ modalOpen: true })};
-  handleClose() {this.setState({ modalOpen: false })};
-  upBid() {this.setState({currentAstro: {...this.state.currentAstro, currentBid: this.state.currentAstro.currentBid + 0.1} })};
-  downBid() {this.setState({currentAstro: {...this.state.currentAstro, currentBid: this.state.currentAstro.currentBid - 0.1} })};
+  handleOpen = () => this.setState({ modalOpen: true });
+  handleClose = () => this.setState({ modalOpen: false });
+  upBid = () => this.setState({currentAstro: {...this.state.currentAstro, currentBid: this.state.currentAstro.currentBid + 0.1} });
+  downBid = () => this.setState({currentAstro: {...this.state.currentAstro, currentBid: this.state.currentAstro.currentBid - 0.1} });
 
   render() {
     return (

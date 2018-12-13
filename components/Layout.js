@@ -1,8 +1,9 @@
 import React from 'react';
-import {Container} from 'semantic-ui-react';
 import Head from 'next/head';
+import { Container } from 'semantic-ui-react';
 
 const Layout = (props) => {
+
   return (
       <Container fluid={props.fluid}>
         <Head>

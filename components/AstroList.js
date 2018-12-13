@@ -1,7 +1,6 @@
 import React from 'react';
-import {Card, Image, Icon, Grid, Segment} from 'semantic-ui-react';
-import {AstroCard} from './index.js';
-
+import { Grid, Segment } from 'semantic-ui-react';
+import { AstroCard } from './index.js';
 
 const AstroList = (props) => {
     

@@ -4,8 +4,6 @@ import { Modal, Button, Header, Form, Card, Grid, Input, Message } from 'semanti
 import { MetaID } from "./index";
 import { SendTransaction } from 'metasdk-react';
 
-var QRCode = require('qrcode.react');
-
 var nameInput, snsInput, priceInput;
 
 const Astro = ({ astro, modalOpen, handleClose, onPressBuy, formLoading, message, messageUrl, openPopup, trxRequest, name, sns }) => {

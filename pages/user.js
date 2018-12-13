@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import metaStellar from '../ethereum/metaStellar.js';
-import web3 from '../ethereum/web3.js';
 import { BigNumber } from 'bignumber.js';
-import { Menu } from 'semantic-ui-react';
-import { Layout, Astro, MetaID, AstroList } from '../components/index';
-import LayoutHeader from '../components/Header';
+import { Menu, Button } from 'semantic-ui-react';
 import Alert from 'react-s-alert';
-import { Button } from 'semantic-ui-react';
+
+import { Layout, AstroList } from '../components/index';
+import LayoutHeader from '../components/Header';
+
+import metaStellar from '../ethereum/metaStellar.js';
 
 export default class User extends Component {
 

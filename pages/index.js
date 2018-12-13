@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import metaStellar from '../ethereum/metaStellar.js';
-import web3 from '../ethereum/web3.js';
-import {BigNumber} from 'bignumber.js';
-import {Layout, Astro, Constellation} from '../components/index';
-import VirtualSky from '../components/VirtualSky';
+import { BigNumber } from 'bignumber.js';
 import Alert from 'react-s-alert';
+
+import { Layout } from '../components/index';
+import VirtualSky from '../components/VirtualSky';
+
+import metaStellar from '../ethereum/metaStellar.js';
 
 class MetaStellarIndex extends Component {
   static async getInitialProps() {

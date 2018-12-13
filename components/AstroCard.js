@@ -1,7 +1,7 @@
 import React from 'react';
-import {Card, Image, Icon} from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 
-const AstroCard = ({astro, starImage, starUrl, starPrice}) => {
+const AstroCard = ({ astro, starImage, starUrl }) => {
 
   return (
       <Card>
