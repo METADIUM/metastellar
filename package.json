@@ -52,12 +52,12 @@
     "swarm-js": "^0.1.39",
     "truffle-hdwallet-provider": "0.0.5",
     "underscore": "^1.9.1",
-    "web3": "^1.0.0-beta.37",
-    "web3-core": "^1.0.0-beta.37",
-    "web3-eth-abi": "^1.0.0-beta.37",
-    "web3-eth-accounts": "^1.0.0-beta.37",
-    "web3-eth-contract": "^1.0.0-beta.37",
-    "web3-eth-personal": "^1.0.0-beta.37",
+    "web3": "^1.0.0-beta.34",
+    "web3-core": "^1.0.0-beta.34",
+    "web3-eth-abi": "^1.0.0-beta.34",
+    "web3-eth-accounts": "^1.0.0-beta.34",
+    "web3-eth-contract": "^1.0.0-beta.34",
+    "web3-eth-personal": "^1.0.0-beta.34",
     "xhr2-cookies": "^1.1.0"
   },
   "devDependencies": {
