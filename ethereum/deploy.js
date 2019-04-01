@@ -14,24 +14,25 @@ let deployedMetaStellar
 let web3
 
 const setEnv = async () => {
-  web3 = new Web3(new Web3.providers.HttpProvider(credentials['url']))
+  web3 = new Web3(new Web3.providers.HttpProvider(credentials.url))
 }
 
 // Signs the given transaction data and sends it. Abstracts some of the details
 // of buffering and serializing the transaction for web3.
 const sendSigned = async (txData) => {
-  const privateKey = Buffer.from(credentials['privkey'], 'hex')
+  const privateKey = Buffer.from(credentials.privkey, 'hex')
   const transaction = new Tx(txData)
   transaction.sign(privateKey)
   const serializedTx = transaction.serialize().toString('hex')
-  web3.eth.sendSignedTransaction('0x' + serializedTx, () => {})
+  web3.eth.sendSignedTransaction('0x' + serializedTx, (error, hash) => console.log(error, hash))
 }
 
 const bigbang = async () => {
   const deployer = credentials['addr']
-  const deployerInfo = { gas: 40e4, from: deployer, gasPrice: 30e9 }
+  const deployerInfo = { gas: 40e4, from: deployer, gasPrice: 80e9 }
 
   var nonce = await web3.eth.getTransactionCount(deployer)
+  console.log('nonce', nonce)
 
   deployedMetaStellar = await new web3.eth.Contract(
     JSON.parse(compiledMetaStellar.interface),
@@ -39,11 +40,16 @@ const bigbang = async () => {
   )
 
   var idx = await deployedMetaStellar.methods.lastId().call()
+  console.log('lastId', idx)
 
   var callReg = async () => {
     for (; idx < sampleStars.length; idx++) {
       var star = sampleStars[idx]
-      var request = deployedMetaStellar.methods.registerAstro(star.ra.decimal * 1000, star.dec.decimal * 1000, star.target.name).send.request(deployerInfo)
+      var request = deployedMetaStellar.methods.registerAstro(
+          Math.floor(star.ra.decimal * 1000),
+          Math.floor(star.dec.decimal * 1000),
+          star.target.name
+        ).send.request(deployerInfo)
 
       txData = {
         nonce: web3.utils.toHex(nonce++),
