@@ -86,7 +86,7 @@ export default class VirtualSky extends Component {
     const { id } = this.state.currentAstro
 
     this.setState({ formLoading: true }, async () => {
-      this.trxRequest = metaStellar.methods.buyAstro(id, name, sns).send.request({ from: '', value: web3.utils.toWei(bid, 'ether'), gasPrice: '1' })
+      this.trxRequest = metaStellar.methods.buyAstro(id, name, sns).send.request({ value: web3.utils.toWei(bid, 'ether') })
       this.setState({ message: `Scan QR Code with MetaID App. and Send Tx`, formLoading: false, popup: true })
     })
   };

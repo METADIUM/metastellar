@@ -25,7 +25,7 @@ const MetaID = ({ metaID, starImage, starUrl, starPrice }) => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <a href={`https://ropsten.etherscan.io/address/${owner}`} target={'_blank'}>
+        <a href={`https://testnetexplorer.metadium.com/address/${owner}`} target={'_blank'}>
             Address
         </a>
       </Card.Content>

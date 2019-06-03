@@ -42,8 +42,8 @@ contract MetaStellar {
         multiplier = 18;
     }
 
-    // registering star. 
-    function registerAstro(int _raDecimal, int _decDecimal, string _name) public payable cosmosOnly {
+    // registering star
+    function registerAstro(int _raDecimal, int _decDecimal, string _name) public cosmosOnly {
         MetaID memory metaID = MetaID({owner : msg.sender, name : 'Metadium', sns: 'metadium.com'});
         uint newAstroId = ++lastId;
         Astro memory astro = Astro({
@@ -66,6 +66,7 @@ contract MetaStellar {
         require(msg.value >= minimumPrice + targetAstro.lastBid); // verify new bid qualifies minimum price bid gap.
 
         MetaID memory lastMetaID = targetAstro.metaID;
+        
         MetaID memory newMetaID = MetaID({
             owner : msg.sender,
             name : _metaIDName,
@@ -73,9 +74,11 @@ contract MetaStellar {
             });
         targetAstro.metaID = newMetaID;
         targetAstro.lastBid = msg.value; // update bidding price of current star
-        lastMetaID.owner.transfer(msg.value); // refund ether to previous owner.
+
         removeFromBucket(lastMetaID.owner, _targetAstroId); // remove star from previous owner's address
         addToBucket(msg.sender, _targetAstroId); // add star to current buyer's address
+
+        if (targetAstro.lastBid > 0) lastMetaID.owner.transfer(targetAstro.lastBid); // refund ether to previous owner.
     }
 
     // function to add star id into bucket of given _hodler(address)

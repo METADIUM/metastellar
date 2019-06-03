@@ -107,7 +107,7 @@ export default class User extends Component {
       <Layout fluid style={{ margin: '5vw' }}>
         <LayoutHeader>
           <Menu.Item>
-            <h3>{`${this.state.metaID.name}'s space`} | <a href={`https:${this.state.metaID.sns}`} target={'_blank'}>SNS</a> | <a href={`https://ropsten.etherscan.io/address/${this.state.metaID.owner}`} target={'_blank'}>Address</a></h3>
+            <h3>{`${this.state.metaID.name}'s space`} | <a href={`https:${this.state.metaID.sns}`} target={'_blank'}>SNS</a> | <a href={`https://testnetexplorer.metadium.com/address/${this.state.metaID.owner}`} target={'_blank'}>Address</a></h3>
           </Menu.Item>
         </LayoutHeader>
         <AstroList astros={this.state.astros} />
